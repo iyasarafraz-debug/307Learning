@@ -1,0 +1,3245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>307Learning — Digital Campus</title>
+
+<style>
+:root{
+    --bg:#f5f1e8;
+    --card:#fffdf7;
+    --text:#11110f;
+    --muted:#6e6a60;
+    --line:rgba(17,17,15,.12);
+    --blue:#3155ff;
+    --blue2:#6478ff;
+    --dark:#111;
+    --white:#fff;
+    --green:#18a558;
+    --red:#e5484d;
+    --shadow:0 20px 60px rgba(0,0,0,.08);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Inter,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.5;
+}
+
+button,
+input,
+textarea,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+    position:fixed;
+    top:15px;
+    left:4%;
+    right:4%;
+    z-index:1000;
+
+    display:flex;
+    align-items:center;
+    gap:25px;
+
+    padding:13px 18px;
+
+    background:rgba(245,241,232,.88);
+    backdrop-filter:blur(18px);
+
+    border:1px solid var(--line);
+    border-radius:22px;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.06);
+}
+
+.logo{
+    font-size:1.25rem;
+    font-weight:900;
+    letter-spacing:-1px;
+    white-space:nowrap;
+}
+
+.logo span{
+    color:var(--blue);
+}
+
+.navlinks{
+    display:flex;
+    gap:18px;
+    flex:1;
+    font-size:.85rem;
+    color:#4d4a43;
+}
+
+.navlinks a:hover{
+    color:var(--blue);
+}
+
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.btn{
+    border:1px solid var(--text);
+    background:transparent;
+    color:var(--text);
+
+    padding:11px 17px;
+    border-radius:999px;
+
+    font-weight:800;
+    font-size:.82rem;
+
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn.primary{
+    background:var(--text);
+    color:white;
+}
+
+.btn.blue{
+    background:var(--blue);
+    color:white;
+    border-color:var(--blue);
+}
+
+.btn.small{
+    padding:8px 13px;
+    font-size:.75rem;
+}
+
+.navburger{
+    display:none;
+    border:0;
+    background:none;
+    flex-direction:column;
+    gap:4px;
+}
+
+.navburger span{
+    width:22px;
+    height:2px;
+    background:var(--text);
+}
+
+.mobile-menu{
+    display:none;
+
+    position:fixed;
+    top:78px;
+    left:5%;
+    right:5%;
+
+    z-index:999;
+
+    padding:20px;
+
+    background:var(--card);
+
+    border:1px solid var(--line);
+    border-radius:20px;
+
+    box-shadow:var(--shadow);
+
+    flex-direction:column;
+    gap:15px;
+}
+
+.mobile-menu.open{
+    display:flex;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:100vh;
+
+    padding:150px 6% 80px;
+
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+
+    gap:50px;
+
+    align-items:center;
+}
+
+.kicker{
+    color:var(--blue);
+    font-size:.72rem;
+    font-weight:900;
+    letter-spacing:.08em;
+}
+
+.hero h1{
+    font-size:clamp(3.8rem,8vw,7rem);
+    line-height:.87;
+    letter-spacing:-.06em;
+
+    margin:18px 0 25px;
+}
+
+.hero p{
+    max-width:620px;
+    color:var(--muted);
+    font-size:1.05rem;
+    line-height:1.7;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    margin-top:28px;
+    flex-wrap:wrap;
+}
+
+.stats{
+    display:flex;
+    gap:35px;
+    margin-top:45px;
+}
+
+.stat strong{
+    display:block;
+    font-size:1.7rem;
+}
+
+.stat span{
+    color:var(--muted);
+    font-size:.75rem;
+}
+
+/* HERO VISUAL */
+
+.hero-visual{
+    height:550px;
+
+    border-radius:35px;
+
+    background:
+        radial-gradient(circle at 70% 20%,#6878ff,transparent 25%),
+        linear-gradient(145deg,#171717,#050505);
+
+    position:relative;
+    overflow:hidden;
+
+    box-shadow:0 35px 80px rgba(0,0,0,.2);
+}
+
+.orbit{
+    position:absolute;
+    width:400px;
+    height:400px;
+
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:50%;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+}
+
+.core{
+    position:absolute;
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    background:radial-gradient(circle at 30% 25%,white,#7b85ff 30%,#2935a8 70%);
+
+    box-shadow:0 0 100px #5260ff;
+}
+
+.float-card{
+    position:absolute;
+
+    padding:16px;
+
+    width:180px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    backdrop-filter:blur(12px);
+
+    color:white;
+}
+
+.float-card.one{
+    top:60px;
+    left:35px;
+}
+
+.float-card.two{
+    bottom:70px;
+    right:30px;
+}
+
+.float-card strong{
+    display:block;
+    font-size:1.3rem;
+}
+
+.float-card span{
+    color:#bbb;
+    font-size:.75rem;
+}
+
+/* ================= GENERAL SECTION ================= */
+
+.section{
+    padding:100px 6%;
+}
+
+.section.alt{
+    background:#ebe5d9;
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:20px;
+
+    margin-bottom:35px;
+}
+
+.section h2{
+    font-size:clamp(2.4rem,5vw,4.5rem);
+    line-height:.95;
+    letter-spacing:-.05em;
+
+    margin-top:10px;
+}
+
+.muted{
+    color:var(--muted);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+/* ================= CARDS ================= */
+
+.card{
+    background:var(--card);
+
+    border:1px solid var(--line);
+
+    border-radius:25px;
+
+    padding:24px;
+
+    box-shadow:0 8px 30px rgba(0,0,0,.03);
+
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    box-shadow:var(--shadow);
+}
+
+.tag{
+    display:inline-block;
+
+    padding:6px 10px;
+
+    border-radius:999px;
+
+    background:#eef0ff;
+
+    color:#3349d4;
+
+    font-size:.7rem;
+
+    font-weight:900;
+}
+
+.card h3{
+    font-size:1.4rem;
+    margin:18px 0 9px;
+}
+
+.card p{
+    color:var(--muted);
+    font-size:.9rem;
+    line-height:1.6;
+}
+
+.card-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-top:22px;
+}
+
+.price{
+    font-weight:900;
+}
+
+/* ================= COURSE ================= */
+
+.course-card{
+    display:flex;
+    flex-direction:column;
+}
+
+.course-icon{
+    height:150px;
+
+    border-radius:18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:3.5rem;
+
+    background:linear-gradient(135deg,#151515,#4357ff);
+
+    color:white;
+}
+
+.course-info{
+    padding-top:18px;
+}
+
+/* ================= ROADMAP ================= */
+
+.roadmap{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.step{
+    background:#151513;
+    color:white;
+
+    border-radius:22px;
+
+    padding:24px;
+
+    min-height:190px;
+}
+
+.step-number{
+    color:#9da9ff;
+    font-size:.7rem;
+    font-weight:900;
+}
+
+.step h3{
+    margin:25px 0 8px;
+}
+
+.step p{
+    color:#aaa;
+    font-size:.82rem;
+}
+
+/* ================= AI ================= */
+
+.ai-section{
+    padding:100px 6%;
+}
+
+.ai-box{
+    background:#101010;
+    color:white;
+
+    border-radius:32px;
+
+    padding:45px;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    gap:40px;
+
+    overflow:hidden;
+}
+
+.ai-box h2{
+    font-size:clamp(2.5rem,5vw,4.5rem);
+    line-height:.95;
+    letter-spacing:-.05em;
+
+    margin:12px 0 20px;
+}
+
+.ai-box p{
+    color:#aaa;
+    line-height:1.7;
+}
+
+.ai-chat{
+    background:#191919;
+
+    border:1px solid #333;
+
+    border-radius:24px;
+
+    padding:20px;
+
+    display:flex;
+    flex-direction:column;
+
+    min-height:330px;
+}
+
+.chat-messages{
+    flex:1;
+    overflow:auto;
+
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+
+    margin-bottom:15px;
+}
+
+.message{
+    max-width:85%;
+
+    padding:12px 15px;
+
+    border-radius:16px;
+
+    font-size:.85rem;
+}
+
+.message.user{
+    background:#3155ff;
+    align-self:flex-end;
+}
+
+.message.ai{
+    background:#292929;
+    align-self:flex-start;
+    color:#ddd;
+}
+
+.chat-input{
+    display:flex;
+    gap:8px;
+}
+
+.chat-input input{
+    flex:1;
+
+    background:#111;
+
+    border:1px solid #444;
+
+    color:white;
+
+    padding:12px 15px;
+
+    border-radius:999px;
+
+    outline:none;
+}
+
+/* ================= SHORTS ================= */
+
+.shorts{
+    display:flex;
+    gap:18px;
+
+    overflow:auto;
+
+    padding-bottom:10px;
+}
+
+.short{
+    min-width:220px;
+    height:320px;
+
+    padding:20px;
+
+    border-radius:25px;
+
+    color:white;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:end;
+
+    background:linear-gradient(160deg,#151515,#3d50ff);
+}
+
+.short:nth-child(2){
+    background:linear-gradient(160deg,#151515,#9b63ff);
+}
+
+.short:nth-child(3){
+    background:linear-gradient(160deg,#151515,#e8664d);
+}
+
+.short:nth-child(4){
+    background:linear-gradient(160deg,#151515,#1da87a);
+}
+
+.short small{
+    color:#bbb;
+}
+
+/* ================= SIGNUP ================= */
+
+.signup{
+    padding:100px 6%;
+
+    background:var(--blue);
+
+    color:white;
+}
+
+.signup-inner{
+    max-width:700px;
+}
+
+.signup h2{
+    font-size:clamp(2.5rem,5vw,4.2rem);
+    line-height:1;
+
+    letter-spacing:-.05em;
+
+    margin-bottom:15px;
+}
+
+.signup p{
+    color:#dfe3ff;
+
+    margin-bottom:25px;
+}
+
+.signup-form{
+    display:flex;
+    gap:10px;
+}
+
+.signup-form input{
+    flex:1;
+
+    border:0;
+
+    padding:15px 18px;
+
+    border-radius:999px;
+
+    outline:none;
+}
+
+.signup-form button{
+    border:0;
+
+    background:#111;
+
+    color:white;
+
+    padding:15px 25px;
+
+    border-radius:999px;
+
+    font-weight:800;
+}
+
+.form-message{
+    margin-top:12px;
+    font-size:.8rem;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    padding:55px 6%;
+
+    background:#111;
+
+    color:white;
+
+    display:flex;
+    justify-content:space-between;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+}
+
+footer .muted{
+    color:#999;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    position:fixed;
+
+    inset:0;
+
+    z-index:2000;
+
+    background:rgba(0,0,0,.7);
+
+    backdrop-filter:blur(10px);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+}
+
+.modal-box{
+    width:min(600px,100%);
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    background:var(--card);
+
+    border-radius:28px;
+
+    padding:30px;
+
+    position:relative;
+
+    box-shadow:0 30px 100px rgba(0,0,0,.3);
+}
+
+.close{
+    position:absolute;
+
+    right:18px;
+    top:18px;
+
+    width:38px;
+    height:38px;
+
+    border-radius:50%;
+
+    border:1px solid var(--line);
+
+    background:transparent;
+}
+
+.modal h2{
+    font-size:2rem;
+
+    margin-bottom:20px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+
+    font-size:.8rem;
+
+    font-weight:800;
+
+    margin-bottom:6px;
+}
+
+.form-group input{
+    width:100%;
+
+    padding:13px 15px;
+
+    border-radius:12px;
+
+    border:1px solid var(--line);
+
+    background:white;
+
+    outline:none;
+}
+
+.form-group input:focus{
+    border-color:var(--blue);
+}
+
+.modal-actions{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+.modal-actions button{
+    flex:1;
+}
+
+/* ================= DASHBOARD ================= */
+
+.dashboard{
+    padding:130px 6% 80px;
+}
+
+.dashboard-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+
+    margin-bottom:35px;
+}
+
+.dashboard-header h1{
+    font-size:3.5rem;
+    letter-spacing:-.05em;
+}
+
+.progress{
+    height:8px;
+
+    background:#ddd;
+
+    border-radius:99px;
+
+    overflow:hidden;
+
+    margin-top:15px;
+}
+
+.progress-bar{
+    height:100%;
+
+    background:var(--blue);
+
+    border-radius:99px;
+}
+
+/* ================= COURSE MODAL ================= */
+
+.lesson-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.lesson{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:15px;
+
+    border:1px solid var(--line);
+
+    border-radius:14px;
+
+    background:white;
+}
+
+.lesson.completed{
+    border-color:var(--green);
+    background:#f0fff7;
+}
+
+.lesson-left{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.lesson-number{
+    width:35px;
+    height:35px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#eef0ff;
+
+    color:var(--blue);
+
+    font-weight:900;
+}
+
+/* ================= QUIZ ================= */
+
+.quiz-question{
+    margin-bottom:25px;
+}
+
+.quiz-option{
+    display:block;
+
+    width:100%;
+
+    text-align:left;
+
+    padding:14px;
+
+    margin-top:8px;
+
+    border:1px solid var(--line);
+
+    border-radius:12px;
+
+    background:white;
+}
+
+.quiz-option:hover{
+    border-color:var(--blue);
+}
+
+.quiz-result{
+    padding:15px;
+
+    border-radius:14px;
+
+    background:#eef0ff;
+
+    margin-top:20px;
+}
+
+/* ================= ADMIN ================= */
+
+.admin-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+
+    margin-bottom:30px;
+}
+
+.admin-stat{
+    background:#111;
+    color:white;
+
+    border-radius:20px;
+
+    padding:25px;
+}
+
+.admin-stat strong{
+    font-size:2rem;
+    display:block;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+    position:fixed;
+
+    right:25px;
+    bottom:25px;
+
+    z-index:5000;
+
+    background:#111;
+
+    color:white;
+
+    padding:15px 20px;
+
+    border-radius:14px;
+
+    box-shadow:var(--shadow);
+
+    transform:translateY(150px);
+
+    transition:.3s;
+}
+
+.toast.show{
+    transform:translateY(0);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:950px){
+
+    .navlinks{
+        display:none;
+    }
+
+    .navburger{
+        display:flex;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+    }
+
+    .grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .roadmap{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .ai-box{
+        grid-template-columns:1fr;
+    }
+
+    .admin-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:650px){
+
+    nav{
+        left:3%;
+        right:3%;
+    }
+
+    .nav-actions .btn{
+        display:none;
+    }
+
+    .hero{
+        padding:125px 5% 70px;
+    }
+
+    .hero h1{
+        font-size:3.5rem;
+    }
+
+    .hero-visual{
+        height:400px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .roadmap{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        flex-wrap:wrap;
+    }
+
+    .section,
+    .ai-section,
+    .signup,
+    .dashboard{
+        padding-left:5%;
+        padding-right:5%;
+    }
+
+    .signup-form{
+        flex-direction:column;
+    }
+
+    .signup-form input,
+    .signup-form button{
+        width:100%;
+    }
+
+    .admin-grid{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+    <div class="logo">
+        307<span>Learning</span>
+    </div>
+
+    <div class="navlinks">
+
+        <a href="#home">Home</a>
+        <a href="#courses">Courses</a>
+        <a href="#engineering">Engineering</a>
+        <a href="#career">Career</a>
+        <a href="#ai">AI Study</a>
+
+    </div>
+
+    <div class="nav-actions">
+
+        <button class="btn small" onclick="openLogin()">
+            Login
+        </button>
+
+        <button class="btn primary small" onclick="openSignup()">
+            Start Free
+        </button>
+
+        <button class="navburger" id="burger">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+    </div>
+
+</nav>
+
+<!-- MOBILE MENU -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+    <a href="#home">Home</a>
+    <a href="#courses">Courses</a>
+    <a href="#engineering">Engineering</a>
+    <a href="#career">Career</a>
+    <a href="#ai">AI Study</a>
+
+    <button class="btn primary" onclick="openSignup()">
+        Start Free
+    </button>
+
+</div>
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div>
+
+        <div class="kicker">
+            THE DIGITAL CAMPUS FOR THE NEXT GENERATION
+        </div>
+
+        <h1>
+            LEARN.<br>
+            BUILD.<br>
+            BECOME.
+        </h1>
+
+        <p>
+            Engineering subjects, practical skills, coding,
+            AI, projects, career roadmaps and learning resources —
+            all inside one digital campus.
+        </p>
+
+        <div class="hero-buttons">
+
+            <button class="btn primary"
+                    onclick="document.getElementById('courses').scrollIntoView()">
+                Explore Courses
+            </button>
+
+            <button class="btn"
+                    onclick="document.getElementById('career').scrollIntoView()">
+                Explore Career
+            </button>
+
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong>40+</strong>
+                <span>Free lessons</span>
+            </div>
+
+            <div class="stat">
+                <strong>12</strong>
+                <span>Skill courses</span>
+            </div>
+
+            <div class="stat">
+                <strong>4</strong>
+                <span>Career paths</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="hero-visual">
+
+        <div class="orbit"></div>
+
+        <div class="core"></div>
+
+        <div class="float-card one">
+
+            <strong>AI + CS</strong>
+
+            <span>
+                Learn modern technology
+                step by step.
+            </span>
+
+        </div>
+
+        <div class="float-card two">
+
+            <strong>BUILD</strong>
+
+            <span>
+                Turn knowledge into
+                real projects.
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= COURSES ================= -->
+
+<section class="section" id="courses">
+
+    <div class="section-head">
+
+        <div>
+
+            <div class="kicker">
+                LEARNING
+            </div>
+
+            <h2>
+                Learn skills<br>
+                that matter.
+            </h2>
+
+        </div>
+
+        <div class="muted">
+            Free • Practical • Career-focused
+        </div>
+
+    </div>
+
+    <div class="grid" id="courseGrid">
+    </div>
+
+</section>
+
+
+<!-- ================= ENGINEERING ================= -->
+
+<section class="section alt" id="engineering">
+
+    <div class="section-head">
+
+        <div>
+
+            <div class="kicker">
+                ENGINEERING CAMPUS
+            </div>
+
+            <h2>
+                College subjects,<br>
+                made simple.
+            </h2>
+
+        </div>
+
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <span class="tag">
+                SEMESTER
+            </span>
+
+            <h3>
+                Engineering Mathematics
+            </h3>
+
+            <p>
+                Step-by-step explanations,
+                derivations, important questions
+                and revision material.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <span class="tag">
+                CORE CS
+            </span>
+
+            <h3>
+                DBMS • OS • CN
+            </h3>
+
+            <p>
+                Understand important computer
+                science subjects with practical examples.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <span class="tag">
+                PROGRAMMING
+            </span>
+
+            <h3>
+                C • Python • Java
+            </h3>
+
+            <p>
+                Start from basics and gradually
+                build programming confidence.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CAREER ================= -->
+
+<section class="section" id="career">
+
+    <div class="section-head">
+
+        <div>
+
+            <div class="kicker">
+                CAREER GPS
+            </div>
+
+            <h2>
+                Your career,<br>
+                mapped.
+            </h2>
+
+        </div>
+
+    </div>
+
+    <div class="roadmap">
+
+        <div class="step">
+
+            <div class="step-number">
+                01 FOUNDATION
+            </div>
+
+            <h3>
+                Programming
+            </h3>
+
+            <p>
+                Python / Java / C++
+            </p>
+
+        </div>
+
+        <div class="step">
+
+            <div class="step-number">
+                02 CORE
+            </div>
+
+            <h3>
+                DSA + CS
+            </h3>
+
+            <p>
+                DBMS / OS / CN / OOP
+            </p>
+
+        </div>
+
+        <div class="step">
+
+            <div class="step-number">
+                03 BUILD
+            </div>
+
+            <h3>
+                Real Projects
+            </h3>
+
+            <p>
+                Web / AI / APIs / GitHub
+            </p>
+
+        </div>
+
+        <div class="step">
+
+            <div class="step-number">
+                04 CAREER
+            </div>
+
+            <h3>
+                Internships
+            </h3>
+
+            <p>
+                Resume / Interviews /
+                Applications
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= AI ================= -->
+
+<section class="ai-section" id="ai">
+
+    <div class="ai-box">
+
+        <div>
+
+            <div class="kicker">
+                AI STUDY PARTNER
+            </div>
+
+            <h2>
+                Your classroom
+                can think with you.
+            </h2>
+
+            <p>
+                Ask questions, simplify concepts,
+                generate quizzes, explain code and
+                practice for exams.
+            </p>
+
+        </div>
+
+        <div class="ai-chat">
+
+            <div class="chat-messages" id="chatMessages">
+
+                <div class="message ai">
+                    Hi! I'm 307's AI Study Partner.
+                    Ask me something about programming,
+                    DBMS, AI or engineering.
+                </div>
+
+            </div>
+
+            <div class="chat-input">
+
+                <input
+                    id="aiInput"
+                    type="text"
+                    placeholder="Ask something..."
+                >
+
+                <button
+                    class="btn blue"
+                    onclick="askAI()">
+                    Ask
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SHORTS ================= -->
+
+<section class="section alt">
+
+    <div class="section-head">
+
+        <div>
+
+            <div class="kicker">
+                307 SHORTS
+            </div>
+
+            <h2>
+                Learn something<br>
+                in 60 seconds.
+            </h2>
+
+        </div>
+
+    </div>
+
+    <div class="shorts">
+
+        <div class="short">
+
+            <small>AI</small>
+
+            <strong>
+                What is Generative AI?
+            </strong>
+
+        </div>
+
+        <div class="short">
+
+            <small>CAREER</small>
+
+            <strong>
+                3 things recruiters notice
+            </strong>
+
+        </div>
+
+        <div class="short">
+
+            <small>ENGINEERING</small>
+
+            <strong>
+                Why does a CPU need cache?
+            </strong>
+
+        </div>
+
+        <div class="short">
+
+            <small>CODING</small>
+
+            <strong>
+                1 Python concept in 60 sec
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SIGNUP ================= -->
+
+<section class="signup">
+
+    <div class="signup-inner">
+
+        <h2>
+            Start learning free.
+        </h2>
+
+        <p>
+            Create your 307Learning account
+            and start building your learning journey.
+        </p>
+
+        <form
+            class="signup-form"
+            id="emailForm">
+
+            <input
+                type="email"
+                id="emailInput"
+                placeholder="you@email.com"
+                required
+            >
+
+            <button type="submit">
+                Join 307
+            </button>
+
+        </form>
+
+        <div
+            class="form-message"
+            id="emailMessage">
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<section
+    class="dashboard hidden"
+    id="dashboard">
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <div class="kicker">
+                STUDENT DASHBOARD
+            </div>
+
+            <h1 id="dashboardName">
+                Welcome!
+            </h1>
+
+            <p class="muted">
+                Continue your learning journey.
+            </p>
+
+        </div>
+
+        <button
+            class="btn"
+            onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+
+    <div
+        class="grid"
+        id="dashboardCourses">
+    </div>
+
+</section>
+
+
+<!-- ================= ADMIN ================= -->
+
+<section
+    class="dashboard hidden"
+    id="adminPanel">
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <div class="kicker">
+                ADMIN
+            </div>
+
+            <h1>
+                307 Control Center
+            </h1>
+
+        </div>
+
+        <button
+            class="btn"
+            onclick="closeAdmin()">
+            Close
+        </button>
+
+    </div>
+
+    <div class="admin-grid">
+
+        <div class="admin-stat">
+            <span>Students</span>
+            <strong id="adminStudents">
+                0
+            </strong>
+        </div>
+
+        <div class="admin-stat">
+            <span>Courses</span>
+            <strong>
+                6
+            </strong>
+        </div>
+
+        <div class="admin-stat">
+            <span>Lessons</span>
+            <strong>
+                30+
+            </strong>
+        </div>
+
+        <div class="admin-stat">
+            <span>Revenue</span>
+            <strong>
+                ₹0
+            </strong>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h3>
+            Admin Demo
+        </h3>
+
+        <p>
+            This is the frontend admin interface.
+            A real production admin panel should
+            use server-side authentication and a database.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div>
+
+        <div class="logo">
+            307<span>Learning</span>
+        </div>
+
+        <div class="muted">
+            Learn. Build. Become.
+        </div>
+
+    </div>
+
+    <div class="muted">
+        THE INTERNET IS YOUR CAMPUS.
+    </div>
+
+</footer>
+
+
+<!-- ================= LOGIN MODAL ================= -->
+
+<div
+    class="modal hidden"
+    id="loginModal">
+
+    <div class="modal-box">
+
+        <button
+            class="close"
+            onclick="closeModal('loginModal')">
+            ×
+        </button>
+
+        <h2>
+            Welcome back.
+        </h2>
+
+        <form id="loginForm">
+
+            <div class="form-group">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    required
+                    placeholder="you@email.com"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    required
+                    placeholder="••••••••"
+                >
+
+            </div>
+
+            <div class="modal-actions">
+
+                <button
+                    class="btn primary"
+                    type="submit">
+                    Login
+                </button>
+
+                <button
+                    class="btn"
+                    type="button"
+                    onclick="openSignup()">
+                    Create account
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ================= SIGNUP MODAL ================= -->
+
+<div
+    class="modal hidden"
+    id="signupModal">
+
+    <div class="modal-box">
+
+        <button
+            class="close"
+            onclick="closeModal('signupModal')">
+            ×
+        </button>
+
+        <h2>
+            Create your account.
+        </h2>
+
+        <form id="signupForm">
+
+            <div class="form-group">
+
+                <label>
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="signupName"
+                    required
+                    placeholder="Your name"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="signupUserEmail"
+                    required
+                    placeholder="you@email.com"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="signupPassword"
+                    required
+                    minlength="6"
+                    placeholder="Minimum 6 characters"
+                >
+
+            </div>
+
+            <button
+                class="btn primary"
+                style="width:100%"
+                type="submit">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ================= COURSE MODAL ================= -->
+
+<div
+    class="modal hidden"
+    id="courseModal">
+
+    <div class="modal-box">
+
+        <button
+            class="close"
+            onclick="closeModal('courseModal')">
+            ×
+        </button>
+
+        <div id="courseModalContent">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= QUIZ MODAL ================= -->
+
+<div
+    class="modal hidden"
+    id="quizModal">
+
+    <div class="modal-box">
+
+        <button
+            class="close"
+            onclick="closeModal('quizModal')">
+            ×
+        </button>
+
+        <div id="quizContent">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= TOAST ================= -->
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+<script>
+
+/* =====================================================
+   307LEARNING APPLICATION
+===================================================== */
+
+
+/* ================= COURSE DATA ================= */
+
+const courses = [
+
+    {
+        id:"python",
+        title:"Python Fundamentals",
+        category:"PROGRAMMING",
+        icon:"🐍",
+        price:"Free",
+        level:"Beginner",
+        description:
+        "Learn Python from zero with simple explanations and practical exercises.",
+
+        lessons:[
+            "Introduction to Python",
+            "Variables and Data Types",
+            "Operators",
+            "If Else Conditions",
+            "Loops",
+            "Functions",
+            "Lists and Dictionaries",
+            "Mini Project"
+        ],
+
+        quiz:[
+            {
+                question:"Which symbol is used to create a comment in Python?",
+                options:["//","#","<!--","/*"],
+                answer:1
+            },
+            {
+                question:"Which function displays output?",
+                options:["display()","show()","print()","output()"],
+                answer:2
+            }
+        ]
+    },
+
+    {
+        id:"dsa",
+        title:"DSA Fundamentals",
+        category:"COMPUTER SCIENCE",
+        icon:"🧠",
+        price:"Free",
+        level:"Beginner",
+        description:
+        "Understand arrays, strings, searching, sorting and core problem solving.",
+
+        lessons:[
+            "What is DSA?",
+            "Arrays",
+            "Strings",
+            "Time Complexity",
+            "Searching",
+            "Sorting",
+            "Stacks",
+            "Queues"
+        ],
+
+        quiz:[
+            {
+                question:"Which data structure follows FIFO?",
+                options:["Stack","Queue","Tree","Graph"],
+                answer:1
+            },
+            {
+                question:"Binary search works on:",
+                options:["Unsorted data","Sorted data","Images","Graphs only"],
+                answer:1
+            }
+        ]
+    },
+
+    {
+        id:"dbms",
+        title:"DBMS Simplified",
+        category:"CORE CS",
+        icon:"🗄️",
+        price:"Free",
+        level:"Beginner",
+        description:
+        "Learn databases, SQL, keys, normalization and transactions.",
+
+        lessons:[
+            "Introduction to DBMS",
+            "Database Models",
+            "ER Model",
+            "Primary and Foreign Keys",
+            "SQL Basics",
+            "Joins",
+            "Normalization",
+            "Transactions"
+        ],
+
+        quiz:[
+            {
+                question:"What does DBMS stand for?",
+                options:[
+                    "Data Build Management System",
+                    "Database Management System",
+                    "Digital Base Management System",
+                    "Database Machine System"
+                ],
+                answer:1
+            },
+            {
+                question:"Which key uniquely identifies a record?",
+                options:[
+                    "Foreign Key",
+                    "Primary Key",
+                    "Candidate Text",
+                    "Join Key"
+                ],
+                answer:1
+            }
+        ]
+    },
+
+    {
+        id:"fullstack",
+        title:"Full Stack Development",
+        category:"DEVELOPMENT",
+        icon:"🌐",
+        price:"₹999",
+        level:"Intermediate",
+        description:
+        "Learn how modern web applications are designed and developed.",
+
+        lessons:[
+            "How the Web Works",
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Git and GitHub",
+            "React",
+            "Backend APIs",
+            "Database Integration"
+        ],
+
+        quiz:[
+            {
+                question:"Which language runs in the browser?",
+                options:["JavaScript","SQL","Python only","C"],
+                answer:0
+            }
+        ]
+    },
+
+    {
+        id:"ai",
+        title:"AI Engineering",
+        category:"ARTIFICIAL INTELLIGENCE",
+        icon:"🤖",
+        price:"₹999",
+        level:"Intermediate",
+        description:
+        "Understand AI fundamentals and learn how to build practical AI applications.",
+
+        lessons:[
+            "Introduction to AI",
+            "Python for AI",
+            "Machine Learning",
+            "Training Data",
+            "Neural Networks",
+            "Generative AI",
+            "AI APIs",
+            "AI Project"
+        ],
+
+        quiz:[
+            {
+                question:"What does AI stand for?",
+                options:[
+                    "Automatic Internet",
+                    "Artificial Intelligence",
+                    "Advanced Interface",
+                    "Applied Internet"
+                ],
+                answer:1
+            }
+        ]
+    },
+
+    {
+        id:"career",
+        title:"Software Engineer Roadmap",
+        category:"CAREER",
+        icon:"🚀",
+        price:"Free",
+        level:"All Levels",
+        description:
+        "A practical roadmap from programming fundamentals to internships.",
+
+        lessons:[
+            "Programming Foundation",
+            "DSA",
+            "OOP",
+            "DBMS",
+            "Operating Systems",
+            "Computer Networks",
+            "Projects",
+            "Interview Preparation"
+        ],
+
+        quiz:[
+            {
+                question:"Which skill is commonly tested in software engineering interviews?",
+                options:[
+                    "DSA",
+                    "Cooking",
+                    "Photography",
+                    "Graphic Design only"
+                ],
+                answer:0
+            }
+        ]
+    }
+
+];
+
+
+/* ================= LOCAL STORAGE ================= */
+
+function getUsers(){
+
+    return JSON.parse(
+        localStorage.getItem("307_users") || "[]"
+    );
+
+}
+
+function saveUsers(users){
+
+    localStorage.setItem(
+        "307_users",
+        JSON.stringify(users)
+    );
+
+}
+
+function getCurrentUser(){
+
+    return JSON.parse(
+        localStorage.getItem("307_current_user") || "null"
+    );
+
+}
+
+function saveCurrentUser(user){
+
+    localStorage.setItem(
+        "307_current_user",
+        JSON.stringify(user)
+    );
+
+}
+
+function getProgress(){
+
+    return JSON.parse(
+        localStorage.getItem("307_progress") || "{}"
+    );
+
+}
+
+function saveProgress(progress){
+
+    localStorage.setItem(
+        "307_progress",
+        JSON.stringify(progress)
+    );
+
+}
+
+
+/* ================= TOAST ================= */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+
+        toast.classList.remove("show");
+
+    },2500);
+
+}
+
+
+/* ================= COURSE RENDER ================= */
+
+function renderCourses(){
+
+    const grid =
+        document.getElementById("courseGrid");
+
+    grid.innerHTML = "";
+
+    courses.forEach(course=>{
+
+        const card =
+        document.createElement("div");
+
+        card.className =
+        "card course-card";
+
+        card.innerHTML = `
+
+            <div class="course-icon">
+                ${course.icon}
+            </div>
+
+            <div class="course-info">
+
+                <span class="tag">
+                    ${course.category}
+                </span>
+
+                <h3>
+                    ${course.title}
+                </h3>
+
+                <p>
+                    ${course.description}
+                </p>
+
+                <div class="card-bottom">
+
+                    <div class="price">
+                        ${course.price}
+                    </div>
+
+                    <button
+                        class="btn blue small"
+                        onclick="openCourse('${course.id}')">
+
+                        View Course
+
+                    </button>
+
+                </div>
+
+            </div>
+        `;
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* ================= COURSE MODAL ================= */
+
+function openCourse(id){
+
+    const course =
+        courses.find(c=>c.id===id);
+
+    if(!course) return;
+
+    const progress =
+        getCourseProgress(course.id);
+
+    let lessonsHTML = "";
+
+    course.lessons.forEach((lesson,index)=>{
+
+        const completed =
+            progress.completed?.includes(index);
+
+        lessonsHTML += `
+
+            <div class="lesson ${completed ? "completed":""}">
+
+                <div class="lesson-left">
+
+                    <div class="lesson-number">
+                        ${index+1}
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            ${lesson}
+                        </strong>
+
+                        <div class="muted">
+                            ${completed ? "Completed" : "Lesson"}
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="btn small"
+                    onclick="completeLesson('${course.id}',${index})">
+
+                    ${completed ? "✓ Done":"Complete"}
+
+                </button>
+
+            </div>
+        `;
+
+    });
+
+    document.getElementById(
+        "courseModalContent"
+    ).innerHTML = `
+
+        <span class="tag">
+            ${course.category}
+        </span>
+
+        <h2>
+            ${course.icon} ${course.title}
+        </h2>
+
+        <p class="muted">
+            ${course.description}
+        </p>
+
+        <div style="margin:20px 0">
+
+            <strong>
+                Your Progress
+            </strong>
+
+            <div class="progress">
+
+                <div
+                    class="progress-bar"
+                    style="width:${progress.percent}%">
+                </div>
+
+            </div>
+
+            <div class="muted"
+                 style="margin-top:6px">
+
+                ${progress.percent}% completed
+
+            </div>
+
+        </div>
+
+        <h3 style="margin:25px 0 12px">
+            Course Lessons
+        </h3>
+
+        <div class="lesson-list">
+            ${lessonsHTML}
+        </div>
+
+        <button
+            class="btn blue"
+            style="width:100%;margin-top:20px"
+            onclick="startQuiz('${course.id}')">
+
+            Take Course Quiz
+
+        </button>
+
+    `;
+
+    openModal("courseModal");
+
+}
+
+
+/* ================= PROGRESS ================= */
+
+function getCourseProgress(courseId){
+
+    const progress =
+        getProgress();
+
+    const user =
+        getCurrentUser();
+
+    if(!user){
+
+        return {
+            completed:[],
+            percent:0
+        };
+
+    }
+
+    const key =
+        user.email + "_" + courseId;
+
+    const completed =
+        progress[key] || [];
+
+    const course =
+        courses.find(c=>c.id===courseId);
+
+    const percent =
+        Math.round(
+            (completed.length /
+            course.lessons.length) * 100
+        );
+
+    return {
+        completed,
+        percent
+    };
+
+}
+
+
+/* ================= COMPLETE LESSON ================= */
+
+function completeLesson(courseId,index){
+
+    const user =
+        getCurrentUser();
+
+    if(!user){
+
+        openLogin();
+
+        showToast(
+            "Login first to save progress."
+        );
+
+        return;
+
+    }
+
+    const progress =
+        getProgress();
+
+    const key =
+        user.email + "_" + courseId;
+
+    if(!progress[key]){
+
+        progress[key]=[];
+
+    }
+
+    if(!progress[key].includes(index)){
+
+        progress[key].push(index);
+
+    }
+
+    saveProgress(progress);
+
+    showToast(
+        "Lesson completed 🎉"
+    );
+
+    openCourse(courseId);
+
+    renderDashboard();
+
+}
+
+
+/* ================= LOGIN ================= */
+
+function openLogin(){
+
+    closeModal("signupModal");
+
+    openModal("loginModal");
+
+}
+
+document.getElementById(
+    "loginForm"
+).addEventListener(
+    "submit",
+    function(e){
+
+        e.preventDefault();
+
+        const email =
+            document.getElementById(
+                "loginEmail"
+            ).value.trim().toLowerCase();
+
+        const password =
+            document.getElementById(
+                "loginPassword"
+            ).value;
+
+        const users =
+            getUsers();
+
+        const user =
+            users.find(
+                u =>
+                u.email===email &&
+                u.password===password
+            );
+
+        if(!user){
+
+            showToast(
+                "Invalid email or password."
+            );
+
+            return;
+
+        }
+
+        saveCurrentUser(user);
+
+        closeModal("loginModal");
+
+        showToast(
+            "Welcome back, " + user.name + "!"
+        );
+
+        renderDashboard();
+
+    }
+);
+
+
+/* ================= SIGNUP ================= */
+
+function openSignup(){
+
+    closeModal("loginModal");
+
+    openModal("signupModal");
+
+}
+
+document.getElementById(
+    "signupForm"
+).addEventListener(
+    "submit",
+    function(e){
+
+        e.preventDefault();
+
+        const name =
+            document.getElementById(
+                "signupName"
+            ).value.trim();
+
+        const email =
+            document.getElementById(
+                "signupUserEmail"
+            ).value.trim().toLowerCase();
+
+        const password =
+            document.getElementById(
+                "signupPassword"
+            ).value;
+
+        const users =
+            getUsers();
+
+        if(
+            users.some(
+                u=>u.email===email
+            )
+        ){
+
+            showToast(
+                "Account already exists."
+            );
+
+            return;
+
+        }
+
+        const user = {
+
+            name,
+            email,
+            password,
+            createdAt:
+                new Date().toISOString()
+
+        };
+
+        users.push(user);
+
+        saveUsers(users);
+
+        saveCurrentUser(user);
+
+        closeModal("signupModal");
+
+        showToast(
+            "Account created successfully 🎉"
+        );
+
+        renderDashboard();
+
+    }
+);
+
+
+/* ================= DASHBOARD ================= */
+
+function renderDashboard(){
+
+    const user =
+        getCurrentUser();
+
+    const dashboard =
+        document.getElementById(
+            "dashboard"
+        );
+
+    if(!user){
+
+        dashboard.classList.add("hidden");
+
+        return;
+
+    }
+
+    dashboard.classList.remove("hidden");
+
+    document.getElementById(
+        "dashboardName"
+    ).textContent =
+        "Welcome, " + user.name + " 👋";
+
+    const grid =
+        document.getElementById(
+            "dashboardCourses"
+        );
+
+    grid.innerHTML="";
+
+    courses.forEach(course=>{
+
+        const progress =
+            getCourseProgress(course.id);
+
+        const card =
+            document.createElement("div");
+
+        card.className="card";
+
+        card.innerHTML = `
+
+            <span class="tag">
+                ${course.category}
+            </span>
+
+            <h3>
+                ${course.title}
+            </h3>
+
+            <p>
+                ${course.description}
+            </p>
+
+            <div class="progress">
+
+                <div
+                    class="progress-bar"
+                    style="width:${progress.percent}%">
+                </div>
+
+            </div>
+
+            <p style="margin-top:8px">
+                ${progress.percent}% completed
+            </p>
+
+            <button
+                class="btn blue"
+                style="margin-top:15px"
+                onclick="openCourse('${course.id}')">
+
+                Continue
+
+            </button>
+
+        `;
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* ================= LOGOUT ================= */
+
+function logout(){
+
+    localStorage.removeItem(
+        "307_current_user"
+    );
+
+    document.getElementById(
+        "dashboard"
+    ).classList.add("hidden");
+
+    showToast(
+        "Logged out successfully."
+    );
+
+}
+
+
+/* ================= QUIZ ================= */
+
+function startQuiz(courseId){
+
+    const course =
+        courses.find(c=>c.id===courseId);
+
+    if(!course) return;
+
+    let currentQuestion=0;
+
+    let score=0;
+
+    const questions =
+        course.quiz;
+
+    function renderQuestion(){
+
+        const q =
+            questions[currentQuestion];
+
+        let options="";
+
+        q.options.forEach(
+            (option,index)=>{
+
+                options += `
+
+                    <button
+                        class="quiz-option"
+                        onclick="answerQuiz(${index})">
+
+                        ${String.fromCharCode(65+index)}.
+                        ${option}
+
+                    </button>
+
+                `;
+
+            }
+        );
+
+        document.getElementById(
+            "quizContent"
+        ).innerHTML = `
+
+            <span class="tag">
+                QUIZ
+            </span>
+
+            <h2>
+                ${course.title}
+            </h2>
+
+            <div class="quiz-question">
+
+                <strong>
+                    Question ${currentQuestion+1}
+                    of ${questions.length}
+                </strong>
+
+                <p style="margin-top:15px">
+                    ${q.question}
+                </p>
+
+                ${options}
+
+            </div>
+
+        `;
+
+    }
+
+    window.answerQuiz =
+    function(index){
+
+        if(
+            index ===
+            questions[currentQuestion].answer
+        ){
+
+            score++;
+
+        }
+
+        currentQuestion++;
+
+        if(
+            currentQuestion <
+            questions.length
+        ){
+
+            renderQuestion();
+
+        }else{
+
+            document.getElementById(
+                "quizContent"
+            ).innerHTML = `
+
+                <h2>
+                    Quiz Complete 🎉
+                </h2>
+
+                <div class="quiz-result">
+
+                    You scored
+
+                    <strong>
+                        ${score}/${questions.length}
+                    </strong>
+
+                </div>
+
+                <button
+                    class="btn blue"
+                    style="margin-top:20px;width:100%"
+                    onclick="closeModal('quizModal')">
+
+                    Finish
+
+                </button>
+
+            `;
+
+        }
+
+    };
+
+    closeModal("courseModal");
+
+    openModal("quizModal");
+
+    renderQuestion();
+
+}
+
+
+/* ================= AI ================= */
+
+function askAI(){
+
+    const input =
+        document.getElementById(
+            "aiInput"
+        );
+
+    const text =
+        input.value.trim();
+
+    if(!text) return;
+
+    addMessage(
+        text,
+        "user"
+    );
+
+    input.value="";
+
+    setTimeout(()=>{
+
+        let answer =
+            generateAIAnswer(text);
+
+        addMessage(
+            answer,
+            "ai"
+        );
+
+    },600);
+
+}
+
+
+function addMessage(
+    text,
+    type
+){
+
+    const box =
+        document.getElementById(
+            "chatMessages"
+        );
+
+    const message =
+        document.createElement(
+            "div"
+        );
+
+    message.className =
+        "message " + type;
+
+    message.textContent =
+        text;
+
+    box.appendChild(message);
+
+    box.scrollTop =
+        box.scrollHeight;
+
+}
+
+
+function generateAIAnswer(question){
+
+    const q =
+        question.toLowerCase();
+
+    if(
+        q.includes("normalization")
+    ){
+
+        return "Normalization in DBMS means organizing database tables to reduce duplicate data and improve consistency. Think of it as storing each important piece of information in the right place.";
+
+    }
+
+    if(
+        q.includes("cache")
+    ){
+
+        return "CPU cache is a small and very fast memory located close to the CPU. It stores frequently used data so the processor can access it faster than going to main memory.";
+
+    }
+
+    if(
+        q.includes("python")
+    ){
+
+        return "Python is a beginner-friendly programming language. Start with variables, data types, conditions, loops, functions, lists and then move toward OOP and projects.";
+
+    }
+
+    if(
+        q.includes("dsa")
+    ){
+
+        return "DSA means Data Structures and Algorithms. Start with arrays and strings, then learn searching, sorting, stacks, queues, linked lists, trees and graphs.";
+
+    }
+
+    if(
+        q.includes("react")
+    ){
+
+        return "React is a JavaScript library used to build user interfaces using reusable components. Learn JavaScript first, then components, props, state, hooks and API integration.";
+
+    }
+
+    if(
+        q.includes("ai")
+    ){
+
+        return "AI means Artificial Intelligence. For an engineering student, a practical path is Python → mathematics basics → machine learning → deep learning → generative AI → AI projects.";
+
+    }
+
+    return "Good question! For the real 307Learning version, this section can be connected to an AI API and your course database so students receive context-aware answers.";
+
+}
+
+
+/* ================= EMAIL ================= */
+
+document.getElementById(
+    "emailForm"
+).addEventListener(
+    "submit",
+    function(e){
+
+        e.preventDefault();
+
+        const email =
+            document.getElementById(
+                "emailInput"
+            ).value;
+
+        document.getElementById(
+            "emailMessage"
+        ).textContent =
+            "You're on the 307Learning list 🎉";
+
+        localStorage.setItem(
+            "307_email",
+            email
+        );
+
+        this.reset();
+
+    }
+);
+
+
+/* ================= MODALS ================= */
+
+function openModal(id){
+
+    document
+        .getElementById(id)
+        .classList.remove("hidden");
+
+}
+
+function closeModal(id){
+
+    document
+        .getElementById(id)
+        .classList.add("hidden");
+
+}
+
+
+/* ================= MOBILE MENU ================= */
+
+document.getElementById(
+    "burger"
+).addEventListener(
+    "click",
+    function(){
+
+        document
+            .getElementById(
+                "mobileMenu"
+            )
+            .classList.toggle("open");
+
+    }
+);
+
+
+/* Close modal by clicking outside */
+
+document.querySelectorAll(
+    ".modal"
+).forEach(modal=>{
+
+    modal.addEventListener(
+        "click",
+        function(e){
+
+            if(e.target===modal){
+
+                modal.classList.add(
+                    "hidden"
+                );
+
+            }
+
+        }
+    );
+
+});
+
+
+/* ================= KEYBOARD ================= */
+
+document.getElementById(
+    "aiInput"
+).addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key==="Enter"){
+
+            askAI();
+
+        }
+
+    }
+);
+
+
+/* ================= ADMIN DEMO ================= */
+
+function openAdmin(){
+
+    document.getElementById(
+        "adminPanel"
+    ).classList.remove(
+        "hidden"
+    );
+
+    const users =
+        getUsers();
+
+    document.getElementById(
+        "adminStudents"
+    ).textContent =
+        users.length;
+
+    document.getElementById(
+        "adminPanel"
+    ).scrollIntoView();
+
+}
+
+function closeAdmin(){
+
+    document.getElementById(
+        "adminPanel"
+    ).classList.add(
+        "hidden"
+    );
+
+}
+
+
+/* ================= INITIALIZE ================= */
+
+renderCourses();
+
+renderDashboard();
+
+
+/* ================= DEV ADMIN ================= */
+
+/*
+   Demo:
+   Open browser console and run:
+
+   openAdmin()
+
+   This is ONLY a frontend demo.
+*/
+
+
+console.log(
+`
+307Learning loaded successfully 🚀
+
+Available demo command:
+openAdmin()
+
+For production:
+Frontend → Backend → Database → Authentication → AI API → Payment
+`
+);
+
+</script>
+
+</body>
+</html>
